@@ -4,6 +4,8 @@ import HomeView from '../views/HomeView.vue'
 import ReceiverLogin from '../views/ReceiverLogin.vue'
 import SenderLogin from '../views/SenderLogin.vue'
 import ProjectsHallView from '../views/ProjectsHallView.vue'
+import HistoryView from '../views/HistoryView.vue'
+import CreditsView from '../views/CreditsView.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -15,14 +17,6 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
     path: '/receiverlogin',
@@ -38,6 +32,16 @@ const routes = [
     path: '/projects',
     name: 'projects',
     component: ProjectsHallView
+  },
+  {
+    path: '/history',
+    name: 'history',
+    component: HistoryView
+  },
+  {
+    path: '/credits',
+    name: 'credits',
+    component: CreditsView
   }
 ]
 

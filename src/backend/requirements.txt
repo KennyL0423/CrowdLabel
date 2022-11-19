@@ -10,3 +10,5 @@ uvicorn
 aiofiles
 python-multipart
 pymysql
+python-jose[cryptography]
+aiosqlite
