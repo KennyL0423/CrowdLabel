@@ -114,17 +114,20 @@ export default {
                 let mailReg = /^([a-zA-Z0-9_-]+(.[a-zA-Z0-9])?)@([a-zA-Z0-9_-]+)((.[a-zA-Z0-9_-]+)+)$/
                 if (!mailReg.test(value)){
                     callback(new Error('邮箱格式错误'));
+                    this.disable = true;
                 } else {
-                    this.disable = false;
+                    this.disable = true;
                     let ready_email = document.getElementById('registeremail').value;
                     this.user.availabilityUsersAvailabilityPut({'email': ready_email},
                     (error, data, response) => {
                         if (response.status == 422){
+                            this.disable = true;
                             callback(new Error('邮箱格式错误'));
-                            this.disable = true;
+                            
                         } else if (!data['email']){
-                            callback(new Error('邮箱已被占用'));
                             this.disable = true;
+                            callback(new Error('邮箱已被占用'));
+                            
                         } else  {
                             this.disable = false;
                             callback();
@@ -211,16 +214,15 @@ export default {
         };
     },
     created () {
+        localStorage.setItem('time', '')
         const time = localStorage.getItem('time');
         if (time && time>0) {
             this.text = time + "s后重新发送"
             this.time = time
             this.emailCounter()
         }
-        
     },
     mounted() {
-        localStorage.setItem('time', '')
         let base = this.$root.basePath
         console.log(base)
         var apiClient = new ApiClient(base);
