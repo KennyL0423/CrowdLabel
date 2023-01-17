@@ -121,8 +121,10 @@ export default {
                     (error, data, response) => {
                         if (response.status == 422){
                             callback(new Error('邮箱格式错误'));
+                            this.disable = true;
                         } else if (!data['email']){
                             callback(new Error('邮箱已被占用'));
+                            this.disable = true;
                         } else  {
                             this.disable = false;
                             callback();
